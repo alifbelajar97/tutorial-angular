@@ -14,4 +14,8 @@ import { DUMMY_USERS } from './mocks/dummy-user';
 })
 export class AppComponent {
   users = DUMMY_USERS;
+  
+  onSelect(id: any){
+    console.log('ID', id)
+  }
 }
