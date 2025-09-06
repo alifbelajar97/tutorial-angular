@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from './components/header/header.component';
 import { UserComponent } from './components/user/user.component';
+import { DUMMY_USERS } from './mocks/dummy-user';
 
 @Component({
   selector: 'app-root',
@@ -12,5 +13,5 @@ import { UserComponent } from './components/user/user.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'tutorial-angular';
+  users = DUMMY_USERS;
 }
