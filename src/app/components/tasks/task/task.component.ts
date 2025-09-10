@@ -1,11 +1,6 @@
 import { Component, Input } from '@angular/core';
-interface Task {
-  id: string;
-  userId: string;
-  title: string;
-  summary: string;
-  dueDate: string;
-}
+import { type Task } from '../../../interfaces/Task.interface'; 
+// import { type Task } from Artinya, kamu hanya mengimpor tipe data (Task) tanpa mengimpor nilai/objek/kelas/fungsi yang ada di runtime.
 
 @Component({
   selector: 'app-task',

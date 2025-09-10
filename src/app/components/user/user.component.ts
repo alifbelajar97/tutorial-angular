@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DUMMY_USERS } from '../../mocks/dummy-user';
-import { User } from '../../interfaces/user.interface';
+import { type User } from '../../interfaces/user.interface';
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
