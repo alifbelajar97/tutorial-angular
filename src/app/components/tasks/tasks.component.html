@@ -6,8 +6,11 @@
         </menu>
     </header>
     <ul>
+        @for(task of selectUserTask; track task.id){
         <li>
             <app-task />
         </li>
+        }
+
     </ul>
 </section>
