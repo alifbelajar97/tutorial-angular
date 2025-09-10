@@ -44,4 +44,9 @@ export class TasksComponent implements OnChanges{
   ngOnChanges(changes: SimpleChanges): void {
     console.log('changeschanges', changes)
   }
+
+  onComplete(id: string){
+    console.log(id)
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
 }
