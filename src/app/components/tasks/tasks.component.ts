@@ -1,10 +1,12 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TaskComponent } from './task/task.component';
+import { NewTaskComponent } from './new-task/new-task.component';
 
 @Component({
   selector: 'app-tasks',
   imports: [
-    TaskComponent
+    TaskComponent,
+    NewTaskComponent
   ],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
@@ -12,6 +14,8 @@ import { TaskComponent } from './task/task.component';
 export class TasksComponent implements OnChanges{
   @Input({ required: true }) name!: any;
   @Input({ required: true }) userId!: string;
+  isNewTask: boolean = false;
+
 
   tasks = [
     {
@@ -48,5 +52,9 @@ export class TasksComponent implements OnChanges{
   onComplete(id: string){
     console.log(id)
     this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
+
+  onStartAddTask(){
+    this.isNewTask = true;
   }
 }
