@@ -57,4 +57,8 @@ export class TasksComponent implements OnChanges{
   onStartAddTask(){
     this.isNewTask = true;
   }
+
+  onCancelAddTask(){
+    this.isNewTask = false;
+  }
 }
