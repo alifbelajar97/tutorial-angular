@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from './new-task/new-task.component';
+import { type NewTask } from './task.model';
+import { Task } from '../../interfaces/Task.interface';
 
 @Component({
   selector: 'app-tasks',
@@ -11,13 +13,13 @@ import { NewTaskComponent } from './new-task/new-task.component';
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
-export class TasksComponent implements OnChanges{
+export class TasksComponent implements OnChanges {
   @Input({ required: true }) name!: any;
   @Input({ required: true }) userId!: string;
   isNewTask: boolean = false;
 
 
-  tasks = [
+  tasks: Task[] = [
     {
       id: 't1',
       userId: 'u1',
@@ -32,7 +34,7 @@ export class TasksComponent implements OnChanges{
       summary: 'Lorem Ipsum set dolor amet',
       dueDate: '2025-12-31'
     },
-     {
+    {
       id: 't3',
       userId: 'u3',
       title: 'Master ANgular',
@@ -41,7 +43,7 @@ export class TasksComponent implements OnChanges{
     },
   ]
 
-  get selectUserTask(){
+  get selectUserTask() {
     return this.tasks.filter((task) => task.userId === this.userId)
   }
 
@@ -49,16 +51,28 @@ export class TasksComponent implements OnChanges{
     console.log('changeschanges', changes)
   }
 
-  onComplete(id: string){
+  onComplete(id: string) {
     console.log(id)
     this.tasks = this.tasks.filter((task) => task.id !== id);
   }
 
-  onStartAddTask(){
+  onStartAddTask() {
     this.isNewTask = true;
   }
 
-  onCancelAddTask(){
+  onCancelAddTask() {
     this.isNewTask = false;
+  }
+
+  add(e: NewTask) {
+    this.tasks.unshift({ 
+      id: new Date().getTime().toString(),
+      title: e.title,
+      dueDate: e.date,
+      summary: e.summary,
+      userId: this.userId
+    });
+    this.isNewTask = false;
+    
   }
 }
