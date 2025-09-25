@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { type Task } from '../../../interfaces/Task.interface';
-// import { type Task } from Artinya, kamu hanya mengimpor tipe data (Task) tanpa mengimpor nilai/objek/kelas/fungsi yang ada di runtime.
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-task',
-  imports: [],
+  imports: [
+    DatePipe
+  ],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css'
 })
