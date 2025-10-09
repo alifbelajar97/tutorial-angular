@@ -1,8 +1,9 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { type NewTask } from './task.model';
 import { Task } from '../../interfaces/Task.interface';
+import { TaskService } from '../../services/task/task.service';
 
 @Component({
   selector: 'app-tasks',
@@ -17,43 +18,20 @@ export class TasksComponent implements OnChanges {
   @Input({ required: true }) name!: any;
   @Input({ required: true }) userId!: string;
   isNewTask: boolean = false;
+  selectUserTask: any;
+  private taskServices = Inject(TaskService);
 
-
-  tasks: Task[] = [
-    {
-      id: 't1',
-      userId: 'u1',
-      title: 'Master ANgular',
-      summary: 'Lorem Ipsum set dolor amet',
-      dueDate: '2025-12-31'
-    },
-    {
-      id: 't2',
-      userId: 'u2',
-      title: 'Master ANgular',
-      summary: 'Lorem Ipsum set dolor amet',
-      dueDate: '2025-12-31'
-    },
-    {
-      id: 't3',
-      userId: 'u3',
-      title: 'Master ANgular',
-      summary: 'Lorem Ipsum set dolor amet',
-      dueDate: '2025-12-31'
-    },
-  ]
-
-  get selectUserTask() {
-    return this.tasks.filter((task) => task.userId === this.userId)
-  }
+  
+  constructor(
+    private taksService: TaskService
+  ){ }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('changeschanges', changes)
   }
 
   onComplete(id: string) {
-    console.log(id)
-    this.tasks = this.tasks.filter((task) => task.id !== id);
+    this.taksService.removeTask(id)
   }
 
   onStartAddTask() {
@@ -65,14 +43,6 @@ export class TasksComponent implements OnChanges {
   }
 
   add(e: NewTask) {
-    this.tasks.unshift({ 
-      id: new Date().getTime().toString(),
-      title: e.title,
-      dueDate: e.date,
-      summary: e.summary,
-      userId: this.userId
-    });
-    this.isNewTask = false;
-    
+    this.taskServices.addTask(e, this.userId)
   }
 }
